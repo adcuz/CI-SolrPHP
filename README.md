@@ -20,3 +20,20 @@ This library is very simple to install, simply load it the way you do any other 
     ));
 
 You need to set `/solr/posts/` to match the name of the core you are searching.
+
+Peforming a simple search
+-------------------------
+Doing a simple search is easy:
+
+    $results = $this->solr->search('cactus');
+
+Performing a DisMax or advanced search
+--------------------------------------
+The simple search above is not useful for real world search applications. You can use the other paramaters of `search()` to use advanced features such as DisMax:
+
+    $results = $this->solr->search('cactus', 0, 10, array(
+        'defType' => 'edismax',
+        'mm' => '100%',
+        'qf' => 'title^10+bodytext'
+    ));
+    
